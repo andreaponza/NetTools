@@ -6,7 +6,7 @@ from queue import Queue
 socket.setdefaulttimeout(0.25)
 print_lock = threading.Lock()
 
-target = input('Enter the host to be scanned: ')
+target = input('Host to be scanned: ')
 t_IP = socket.gethostbyname(target)
 print ('Starting scan on host: ', t_IP)
 
@@ -28,12 +28,14 @@ def threader():
       
 q = Queue()
 startTime = time.time()
-   
+
+# Multithread scan
 for x in range(100):
    t = threading.Thread(target = threader)
    t.daemon = True
    t.start()
-   
+
+# Port range 1 - 500
 for worker in range(1, 500):
    q.put(worker)
    
